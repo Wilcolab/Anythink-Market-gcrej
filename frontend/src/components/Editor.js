@@ -2,6 +2,7 @@ import ListErrors from "./ListErrors";
 import React from "react";
 import agent from "../agent";
 import { connect } from "react-redux";
+import { toast } from "react-toastify";
 import {
   ADD_TAG,
   EDITOR_PAGE_LOADED,
@@ -49,6 +50,12 @@ class Editor extends React.Component {
 
     this.submitForm = (ev) => {
       ev.preventDefault();
+
+      if (!this.props.image) {
+        toast.error("Please, fill the image field!");
+        return;
+      }
+
       const item = {
         title: this.props.title,
         description: this.props.description,
